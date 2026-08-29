@@ -4,16 +4,18 @@ Deinterlace Studio is a quality-first Windows application for converting interla
 
 ## Download
 
-[Download the portable Windows executable](https://github.com/skv89/Deinterlace-Studio/releases/download/v1.14.3/DeinterlaceStudio.exe)
+[Download the portable Windows executable](https://github.com/skv89/Deinterlace-Studio/releases/download/v1.14.5/DeinterlaceStudio.exe)
 
-The application is portable: download `DeinterlaceStudio.exe` and run it directly. The current public release is v1.14.3.
+The application is portable: download `DeinterlaceStudio.exe` and run it directly. The current public release is v1.14.5.
 
-SHA-256: `D4A6E1C9EB9FF5F08B614DF5E6A905BB64B2E0C3F47307696B1009EBDD700F2A`
+SHA-256: `B81065F41C95D861B6DAB0F86A70D34B7BB44724FE2C9A4AB6E62DC584E9856B`
 
 ## Highlights
 
 - Automatic field-order and interlace analysis
 - Quality-first VapourSynth QTGMC processing with FFmpeg BWDIF fallback
+- Preserve-every-temporal-field output is the default for interlaced sources
+- QTGMC runtime compatibility across supported VSJetpack API variants
 - Validated repair of damaged sources before QTGMC processing
 - Optional temporal denoising in the same job
 - Ordered batch processing with per-file preflight checks
