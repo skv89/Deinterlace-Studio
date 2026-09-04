@@ -77,6 +77,27 @@ This is the recommended choice when preparing high-quality input for temporal
 enhancement workflows such as SEEDVR2 and SLP. Choose nominal-rate output only
 when the lower temporal cadence or smaller output is intentional.
 
+Recovering both original field-time samples is a deinterlacing function, not a
+feature of Topaz's denoisers themselves. Topaz documents its denoise model as a
+separate task-specific filter, while its Dione interlaced workflow is the stage
+that doubles frame rate. Once an interlaced source has already been reduced to
+25p, a downstream denoiser cannot recover the discarded second field as genuine
+source evidence; later frame interpolation can only synthesize a replacement.
+See Topaz's documentation for its
+[denoise filter](https://docs.topazlabs.com/topaz-video/filters/denoise) and
+[Dione deinterlacing workflow](https://docs.topazlabs.com/video-ai/how-to-guide/restore-and-upscale-noisy-footage).
+
+Where the downstream workflow accepts the rate, supplying 50p rather than 25p
+gives diffusion-based generative restoration models such as SEEDVR2 and Topaz
+Starlight Precise (SLP) twice as many genuine temporal samples from which to
+understand motion. That added temporal context can improve motion continuity
+and reduce the likelihood of the smearing and ghosting commonly noticed in
+fast-moving scenes. It cannot guarantee that a generative model will never
+produce those artifacts, but it gives the model more real motion evidence than
+a half-rate input. Topaz identifies the
+[Starlight family](https://docs.topazlabs.com/topaz-video/project-starlight-series)
+as diffusion-based.
+
 [![Deinterlace Studio field-rate output selection](https://github.com/skv89/Deinterlace-Studio/releases/download/v1.14.3/deinterlace-studio-field-rate-output.png)](https://github.com/skv89/Deinterlace-Studio/releases/download/v1.14.3/deinterlace-studio-field-rate-output.png)
 
 ## Optional temporal denoising
