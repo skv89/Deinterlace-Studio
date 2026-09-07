@@ -13,17 +13,30 @@ parameters.
 
 ## Download
 
-[Download DeinterlaceStudio.exe for Windows](https://github.com/skv89/Deinterlace-Studio/releases/download/v1.14.6/DeinterlaceStudio.exe)
+[Download DeinterlaceStudio.exe for Windows](https://github.com/skv89/Deinterlace-Studio/releases/download/v1.14.7/DeinterlaceStudio.exe)
 
 Deinterlace Studio is portable. Download `DeinterlaceStudio.exe` and run it
 directly; no installer is required.
 
-- Current release: **v1.14.6**
-- SHA-256: `93ED9B5C7AE93760898532FE93D1FEF458C87B9198622025F1FA9CEBAA9D1426`
-- Windows FileVersion/ProductVersion: **1.14.6**
+- Current release: **v1.14.7**
+- SHA-256: `528F20705F90BD0B58F45CF97768B0935847DD160929E34A52FE8980F9314C67`
+- Windows FileVersion/ProductVersion: **1.14.7**
 
 The executable is currently unsigned, so Windows may display a SmartScreen
 warning when it is first launched.
+
+## What is new in v1.14.7
+
+- **One-click Start.** Add a video and click Start; automatic probing and interlace analysis run when needed. Unclear quick field-order samples trigger one thorough IDet scan, while unresolved results still stop for review. Damage checks and validated QTGMC repair remain separate safeguards; manual Probe is optional.
+- **Maximized startup and improved layout.** The app opens maximized and restores safely after invalid or off-screen saved geometry. Queue, planning and dependency controls remain accessible on smaller screens.
+- **Optional Vulkan setup and simpler decoding choices.** Install only the verified app-local NNEDI3VK add-on, without reinstalling the full processing runtime or changing system Python. Compatible GPUs must pass a real QTGMC render test. CPU QTGMC remains the default; Vulkan uses the existing FP32 quality settings. Hardware decode now offers Automatic and Off, independently of GPU deinterlacing.
+- **Measured Vulkan guidance.** Hover help reports 11%-59% faster QTGMC frame processing in two 720x576 tests on a Ryzen 9 9950X3D and RTX PRO 6000 Blackwell. These figures exclude initialization and encoding. No obvious quality loss was seen in the inspected CPU/Vulkan still frames, but outputs are not pixel-identical and results vary by footage and hardware.
+- **More robust dependencies and source handling.** Broken optional tools no longer prevent otherwise usable CPU paths, cancellation reaches capability/setup checks, and staged FFmpeg/FFprobe pairs are checked for compatibility. Full-range editing-master conversion, RGB precision and decoded-color validation are improved. Unsupported alpha/float, RGB without known colorimetry, and HDR DNxHR paths stop with an explanation.
+- **Edit the waiting batch queue while processing.** Select any row to inspect its current settings. Use Remove/Delete to remove waiting rows, or drag them and use Move up/down to change the remaining order. The active row and already-started rows are protected until the batch finishes. Removing a queue row never deletes source, repair, or output files. Every retained row still completes preflight before encoding starts.
+- **Clearer repair-copy names.** New repair-only copies use `.repair.mkv`, without QTGMC in the filename. These copies preserve interlacing and have not been deinterlaced. The final progressive output still uses `.QTGMC_deinterlaced` (or `.BWDIF_deinterlaced` for BWDIF). Existing files are not renamed.
+- **Four clearer display-aspect choices.** Keep the original size and pixel shape; make square pixels with an exact aspect ratio and no downscaling; make square pixels while keeping source height and resizing width; or set a display ratio without resizing. The help distinguishes display ratios from resolution and labels example dimensions as examples.
+- **Source-aware ProRes and DNxHR.** The app chooses an appropriate supported profile from each source's depth and chroma instead of always forcing the largest 4:4:4 profile. The selected profile and encoder settings remain visible; these editing codecs are still lossy, and conversion does not recover detail missing from the source.
+- **Current selection and clearer help.** Both single-file and batch views show the source-to-output format, selected encoder and effective parameters. The reorganized layout keeps the analysis window usable and the Build / refresh plan and Dependency doctor controls accessible. Probe and Thorough full-file IDet scan have hover help explaining automatic analysis, optional manual checks, and the distinction between field-order scanning and damage repair.
 
 ## The recommended automatic route
 
@@ -73,9 +86,11 @@ to 25 progressive frames per second.
 
 This is the recommended choice when preparing high-quality input for temporal
 enhancement workflows such as SEEDVR2 and SLP. Choose nominal-rate output only
-when the lower temporal cadence or smaller output is intentional. Note Topaz's deinterlacers only preserve the nominal frame rate (e.g. 25p). Once an interlaced source has already been reduced to
-25p, downstream processes cannot recover the discarded second field as genuine
-source evidence; later frame interpolation can only synthesize a replacement.
+when the lower temporal cadence or smaller output is intentional. Note 
+Topaz's deinterlacers only preserve the nominal frame rate (e.g. 25p). Once an 
+interlaced source has already been reduced to 25p, downstream processes cannot recover 
+the discarded second field as genuine source evidence; later frame interpolation can only 
+synthesize a replacement.
 
 Where the downstream workflow accepts the rate, supplying 50p rather than 25p
 gives diffusion-based generative restoration models such as SEEDVR2 and Topaz
