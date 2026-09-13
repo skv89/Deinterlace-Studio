@@ -1,6 +1,6 @@
 # Deinterlace Studio — Third-Party Notices
 
-Deinterlace Studio 1.14.8 includes TkinterDnD2 0.6.2 and its bundled TkDND
+Deinterlace Studio 1.14.9 includes TkinterDnD2 0.6.2 and its bundled TkDND
 native extension for Explorer drag-and-drop.
 
 The executable includes the Python/Tk runtime needed for its GUI. It does not

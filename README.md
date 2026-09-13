@@ -13,24 +13,26 @@ parameters.
 
 ## Download
 
-[Download DeinterlaceStudio.exe for Windows](https://github.com/skv89/Deinterlace-Studio/releases/download/v1.14.8/DeinterlaceStudio.exe)
+[Download DeinterlaceStudio.exe for Windows](https://github.com/skv89/Deinterlace-Studio/releases/download/v1.14.9/DeinterlaceStudio.exe)
 
 Deinterlace Studio is portable. Download `DeinterlaceStudio.exe` and run it
 directly; no installer is required.
 
-- Current release: **v1.14.8**
-- SHA-256: `0621A88B128D13C5FD030BF70FEF7A2707037BB2E15660E00B53C6475076E12F`
-- Windows FileVersion/ProductVersion: **1.14.8**
+- Current release: **v1.14.9**
+- SHA-256: `D87E8E09D49F5DB46583BC9C35AAF86CBF8A3480DCE906B71CB83F1F5BABE7A0`
+- Windows FileVersion/ProductVersion: **1.14.9**
 
 The executable is currently unsigned, so Windows may display a SmartScreen
 warning when it is first launched.
 
-## What is new in v1.14.8
+## What is new in v1.14.9
 
-- **Reliable QTGMC frame counts.** Corrects a false frame-count mismatch that could prevent a completed video from being saved when source timing was irregular and the initial source check took too long.
-- **Earlier timing repair.** With Automatic QTGMC recovery enabled, timing problems are handled before the long deinterlacing run. The app creates and checks a separate repair copy, then continues. Repair can hold available pictures across missing time; it cannot recover pictures that are absent from the source.
-- **More compact layout.** Removes the oversized duplicate heading and tightens spacing, leaving more room for the controls and batch queue.
-- **Open the selected output in Explorer.** The bottom button follows the selected batch row. You can also right-click a row and choose Open output folder to select its completed file. If the file is not ready or has moved, the app opens that row's recorded destination folder.
+- **Better detection of damaged FFV1 video.** Recognizes picture-checksum errors even when the decoder reports success, and checks the complete FFV1 source before QTGMC processing to catch damage outside the quick samples.
+- **Automatic repair and retry with QTGMC.** When recoverable source damage is confirmed and Automatic QTGMC recovery is enabled, the app creates a separate repair copy, checks it completely, and retries processing once. The original video stays intact.
+- **Complete FFV1 output checks.** Checks the finished FFV1 video before marking it complete. A checksum failure stops the job instead of accepting a damaged output.
+- **More reliable cancellation.** Cancel remains effective as diagnosis hands off to repair and during final checks, with previously completed outputs protected.
+
+Complete FFV1 checks add verification time. Repair can preserve recoverable pictures in a usable copy, but it cannot reconstruct missing or damaged scene detail.
 
 ## The recommended automatic route
 
