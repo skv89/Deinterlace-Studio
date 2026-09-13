@@ -13,30 +13,24 @@ parameters.
 
 ## Download
 
-[Download DeinterlaceStudio.exe for Windows](https://github.com/skv89/Deinterlace-Studio/releases/download/v1.14.7/DeinterlaceStudio.exe)
+[Download DeinterlaceStudio.exe for Windows](https://github.com/skv89/Deinterlace-Studio/releases/download/v1.14.8/DeinterlaceStudio.exe)
 
 Deinterlace Studio is portable. Download `DeinterlaceStudio.exe` and run it
 directly; no installer is required.
 
-- Current release: **v1.14.7**
-- SHA-256: `528F20705F90BD0B58F45CF97768B0935847DD160929E34A52FE8980F9314C67`
-- Windows FileVersion/ProductVersion: **1.14.7**
+- Current release: **v1.14.8**
+- SHA-256: `0621A88B128D13C5FD030BF70FEF7A2707037BB2E15660E00B53C6475076E12F`
+- Windows FileVersion/ProductVersion: **1.14.8**
 
 The executable is currently unsigned, so Windows may display a SmartScreen
 warning when it is first launched.
 
-## What is new in v1.14.7
+## What is new in v1.14.8
 
-- **One-click Start.** Add a video and click Start; automatic probing and interlace analysis run when needed. Unclear quick field-order samples trigger one thorough IDet scan, while unresolved results still stop for review. Damage checks and validated QTGMC repair remain separate safeguards; manual Probe is optional.
-- **Maximized startup and improved layout.** The app opens maximized and restores safely after invalid or off-screen saved geometry. Queue, planning and dependency controls remain accessible on smaller screens.
-- **Optional Vulkan setup and simpler decoding choices.** Install only the verified app-local NNEDI3VK add-on, without reinstalling the full processing runtime or changing system Python. Compatible GPUs must pass a real QTGMC render test. CPU QTGMC remains the default; Vulkan uses the existing FP32 quality settings. Hardware decode now offers Automatic and Off, independently of GPU deinterlacing.
-- **Measured Vulkan guidance.** Hover help reports 11%-59% faster QTGMC frame processing in two 720x576 tests on a Ryzen 9 9950X3D and RTX PRO 6000 Blackwell. These figures exclude initialization and encoding. No obvious quality loss was seen in the inspected CPU/Vulkan still frames, but outputs are not pixel-identical and results vary by footage and hardware.
-- **More robust dependencies and source handling.** Broken optional tools no longer prevent otherwise usable CPU paths, cancellation reaches capability/setup checks, and staged FFmpeg/FFprobe pairs are checked for compatibility. Full-range editing-master conversion, RGB precision and decoded-color validation are improved. Unsupported alpha/float, RGB without known colorimetry, and HDR DNxHR paths stop with an explanation.
-- **Edit the waiting batch queue while processing.** Select any row to inspect its current settings. Use Remove/Delete to remove waiting rows, or drag them and use Move up/down to change the remaining order. The active row and already-started rows are protected until the batch finishes. Removing a queue row never deletes source, repair, or output files. Every retained row still completes preflight before encoding starts.
-- **Clearer repair-copy names.** New repair-only copies use `.repair.mkv`, without QTGMC in the filename. These copies preserve interlacing and have not been deinterlaced. The final progressive output still uses `.QTGMC_deinterlaced` (or `.BWDIF_deinterlaced` for BWDIF). Existing files are not renamed.
-- **Four clearer display-aspect choices.** Keep the original size and pixel shape; make square pixels with an exact aspect ratio and no downscaling; make square pixels while keeping source height and resizing width; or set a display ratio without resizing. The help distinguishes display ratios from resolution and labels example dimensions as examples.
-- **Source-aware ProRes and DNxHR.** The app chooses an appropriate supported profile from each source's depth and chroma instead of always forcing the largest 4:4:4 profile. The selected profile and encoder settings remain visible; these editing codecs are still lossy, and conversion does not recover detail missing from the source.
-- **Current selection and clearer help.** Both single-file and batch views show the source-to-output format, selected encoder and effective parameters. The reorganized layout keeps the analysis window usable and the Build / refresh plan and Dependency doctor controls accessible. Probe and Thorough full-file IDet scan have hover help explaining automatic analysis, optional manual checks, and the distinction between field-order scanning and damage repair.
+- **Reliable QTGMC frame counts.** Corrects a false frame-count mismatch that could prevent a completed video from being saved when source timing was irregular and the initial source check took too long.
+- **Earlier timing repair.** With Automatic QTGMC recovery enabled, timing problems are handled before the long deinterlacing run. The app creates and checks a separate repair copy, then continues. Repair can hold available pictures across missing time; it cannot recover pictures that are absent from the source.
+- **More compact layout.** Removes the oversized duplicate heading and tightens spacing, leaving more room for the controls and batch queue.
+- **Open the selected output in Explorer.** The bottom button follows the selected batch row. You can also right-click a row and choose Open output folder to select its completed file. If the file is not ready or has moved, the app opens that row's recorded destination folder.
 
 ## The recommended automatic route
 
